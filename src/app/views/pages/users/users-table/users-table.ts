@@ -10,7 +10,7 @@ import {
   SetFilterModule,
 } from "ag-grid-enterprise";
 import { environment } from '../../../../../environments/environment';
-import { CustomButtonComponent } from '../../../components/custom-button-component/custom-button-component';
+import { EditButtonComponent } from '../../../components/edit-button-component/edit-button-component';
 ModuleRegistry.registerModules([
   ClientSideRowModelModule,
   ColumnMenuModule,
@@ -28,7 +28,7 @@ ModuleRegistry.registerModules([
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [AgGridAngular, CustomButtonComponent],
+  imports: [AgGridAngular, EditButtonComponent],
   templateUrl: './users-table.html',
   styleUrl: './users-table.scss',
 })
@@ -46,7 +46,7 @@ export class UsersTable {
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
     {
-      field: "acciones", cellRenderer: CustomButtonComponent},
+      field: "acciones", cellRenderer: EditButtonComponent},
     { field: "firstname", headerName: 'Nombre', filter: "agSetColumnFilter", cellClass: "text-capitalize" },
     { field: "lastname", headerName: 'Apellidos', filter: "agSetColumnFilter" },
     { field: "tel", headerName: 'Teléfono', filter: "agSetColumnFilter" }
