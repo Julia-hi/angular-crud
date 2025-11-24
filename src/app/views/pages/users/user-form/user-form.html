@@ -1,0 +1,141 @@
+
+  <div class="container pt-2 animated fadeIn faster">
+    <div class="w-100 d-flex flex-column">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn-close d-block" aria-label="Close" (click)="onCancel()"></button>
+      </div>
+      <h4 class="modal-title text-center text-dark">
+        @if (mode() == 'create') {
+        Añadir nuevo usuario
+        } @else {
+        Editar usuario
+        }
+      </h4>
+    </div>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="modal-body border-0">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label required">
+             Nombre <app-required-field></app-required-field>
+            </label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('username')"
+              formControlName="username" [placeholder]="t('users.form.usernamePlaceholder')">
+            @if(isFieldInvalid('username')){
+            <div class="invalid-feedback">
+              {{ t(getFieldError('username')) }}
+            </div>
+            }
+          </div>
+     <!--      <div class="col-md-6 mb-3">
+            <label class="form-label">
+              {{ t('users.form.pass') }} <app-required-field></app-required-field>
+            </label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('password')"
+              formControlName="password" [placeholder]="t('users.form.passPlaceholder')">
+            @if(isFieldInvalid('password')){
+            <div class="invalid-feedback">
+              {{ t(getFieldError('password')) }}
+            </div>
+            }
+          </div> -->
+        </div>
+        <div class="row">
+          <!-- Email -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label required">
+              Correo electronico <app-required-field></app-required-field>
+            </label>
+            <input type="email" class="form-control" [class.is-invalid]="isFieldInvalid('email')"
+              formControlName="email" [placeholder]="t('users.form.emailPlaceholder')">
+            @if(isFieldInvalid('email')){
+            <div class="invalid-feedback">
+              {{ t(getFieldError('email')) }}
+            </div>
+            }
+
+          </div>
+          <!-- NIF -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label required">
+              {{ t('users.form.dniLabel') }}<app-required-field></app-required-field>
+            </label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('dni')" formControlName="dni"
+              [placeholder]="t('users.form.dniPlaceholder')">
+            @if(isFieldInvalid('dni')){
+            <div class="invalid-feedback">
+              {{ t(getFieldError('dni')) }}
+            </div>
+            }
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- First Name -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label required">
+              {{ t('users.form.firstnameLabel') }} <app-required-field></app-required-field>
+            </label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('firstname')"
+              formControlName="firstname" [placeholder]="t('users.form.firstnamePlaceholder')">
+            @if(isFieldInvalid('firstname')){
+            <div class="invalid-feedback">
+              {{ t(getFieldError('firstname')) }}
+            </div>
+            }
+          </div>
+
+          <!-- Last Name -->
+          <div class="col-md-6 mb-3">
+            <label class="form-label required">
+              {{ t('users.form.lastnameLabel') }} <app-required-field></app-required-field>
+            </label>
+            <input type="text" class="form-control" [class.is-invalid]="isFieldInvalid('lastname')"
+              formControlName="lastname" [placeholder]="t('users.form.lastnamePlaceholder')">
+            @if(isFieldInvalid('lastname')){
+            <div class="invalid-feedback">
+              {{ t(getFieldError('lastname')) }}
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- Role -->
+        <div class="row">
+          <div class="col-12">
+            <div class="mb-3">
+              <label class="form-label required">{{ t('users.form.roleLabel') }}
+                <app-required-field></app-required-field></label>
+              <select formControlName="roleId" class="form-select" [class.is-invalid]="isFieldInvalid('roleId')">
+                <option [ngValue]="null" disabled>{{ t('users.form.selectRole') }}</option>
+                @for(role of allAvailableRoles(); track role.id){
+                <option [ngValue]="role.id">
+                  {{ t('roles.' + role.name) }}
+                </option>
+                } @empty {
+                <option disabled>No roles available</option>
+                }
+              </select>
+              @if(isFieldInvalid('roleId')){
+              <div class="invalid-feedback">
+                {{ t('users.form.validation.roleRequired') }}
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer justify-content-center border-0 mb-2">
+        <button type="button" class="btn btn-secondary" (click)="onSubmit()">
+          {{ t('common.save') }}
+        </button>
+        <button type="button" class="btn btn-outline-light" (click)="onCancel()">
+          {{ t('common.cancel') }}
+        </button>
+      </div>
+    </form>
+  </div>
+
