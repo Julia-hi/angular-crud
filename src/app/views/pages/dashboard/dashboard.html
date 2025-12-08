@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+<div class="container h-100">
+    <p>hello, user!</p>
+
+    <div class="row g-3 align-items-center justify-content-center dashboard-line">
+        <div class="col-md-4 text-center h-100">
+            <div class="align-items-center justify-content-center h-100 w-100 bg-primary text-white" (click)="goto('/users')">
+                <div class="col-12">50</div>
+                <div class="col-12">Total users</div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center p-3">
+            <a href="locations" class="btn btn-primary">Registered in last 24 hours</a>
+        </div>
+        <div class="col-md-4 text-center p-3">
+            <a href="locations" class="btn btn-primary">Active users</a>
+        </div>
+    </div>
+    <div class="row g-3 align-items-center justify-content-center dashboard-line">
+        <div class="col-md-4 text-center p-3">
+            <a href="/locations" class="btn btn-primary">All locations</a>
+        </div>
+    </div>
+</div>

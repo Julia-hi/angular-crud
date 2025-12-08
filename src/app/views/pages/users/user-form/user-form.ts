@@ -74,9 +74,36 @@ export class UserForm {
 
     if (!this.userForm.value) return;
 
-    
+
     // TODO
   }
+
+  /**
+  * validate form field by field name
+  * @param fieldName 
+  * @returns 
+  */
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.userForm.get(fieldName);
+    return !!(field && field.invalid && (field.dirty || field.touched));
+  }
+
+  /**
+   * get error message to show in the form
+   * @param fieldName 
+   * @returns 
+   */
+  getFieldError(fieldName: string): string {
+    const field = this.userForm.get(fieldName);
+    if (field?.errors) {
+      if (field.errors['required']) return `communities.form.validation.${fieldName}Required`;
+      if (field.errors['email']) return 'communities.form.validation.emailInvalid';
+      if (field.errors['minlength']) return `communities.form.validation.${fieldName}MinLength`;
+      if (field.errors['min']) return `communities.form.validation.${fieldName}Min`;
+    }
+    return '';
+  }
+
 
 
 }
